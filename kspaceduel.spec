@@ -5,22 +5,22 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kspaceduel
-Version  : 18.08.0
-Release  : 1
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kspaceduel-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kspaceduel-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kspaceduel-18.08.0.tar.xz.sig
+Version  : 18.12.2
+Release  : 2
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kspaceduel-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kspaceduel-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kspaceduel-18.12.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
-Requires: kspaceduel-bin
-Requires: kspaceduel-data
-Requires: kspaceduel-license
-Requires: kspaceduel-locales
+Requires: kspaceduel-bin = %{version}-%{release}
+Requires: kspaceduel-data = %{version}-%{release}
+Requires: kspaceduel-license = %{version}-%{release}
+Requires: kspaceduel-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : libkdegames-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 
 %description
 KSpaceduel
@@ -31,8 +31,8 @@ Two ships fly around the sun and have to shoot the other ship.
 %package bin
 Summary: bin components for the kspaceduel package.
 Group: Binaries
-Requires: kspaceduel-data
-Requires: kspaceduel-license
+Requires: kspaceduel-data = %{version}-%{release}
+Requires: kspaceduel-license = %{version}-%{release}
 
 %description bin
 bin components for the kspaceduel package.
@@ -71,26 +71,26 @@ locales components for the kspaceduel package.
 
 
 %prep
-%setup -q -n kspaceduel-18.08.0
+%setup -q -n kspaceduel-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535263353
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549874358
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535263353
+export SOURCE_DATE_EPOCH=1549874358
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kspaceduel
-cp COPYING %{buildroot}/usr/share/doc/kspaceduel/COPYING
-cp COPYING.DOC %{buildroot}/usr/share/doc/kspaceduel/COPYING.DOC
+mkdir -p %{buildroot}/usr/share/package-licenses/kspaceduel
+cp COPYING %{buildroot}/usr/share/package-licenses/kspaceduel/COPYING
+cp COPYING.DOC %{buildroot}/usr/share/package-licenses/kspaceduel/COPYING.DOC
 pushd clr-build
 %make_install
 popd
@@ -175,9 +175,9 @@ popd
 /usr/share/doc/HTML/uk/kspaceduel/kspaceduel3.png
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kspaceduel/COPYING
-/usr/share/doc/kspaceduel/COPYING.DOC
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kspaceduel/COPYING
+/usr/share/package-licenses/kspaceduel/COPYING.DOC
 
 %files locales -f kspaceduel.lang
 %defattr(-,root,root,-)
